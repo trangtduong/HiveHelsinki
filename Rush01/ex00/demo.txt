@@ -1,0 +1,117 @@
+*int **grid;
+grid = (int **)malloc(9 *sizeof(*grid)); //create 9 lines
+
+i = 0;
+while (i < 9)
+{
+	grid[i] = (int *)malloc(9 * sizeof(int)); //create 9 cells for each line
+	i++;
+}
+
+
+We need to read the argument vector string --> create a copy of int array
+--> similar to strcpy but return integer.
+
+ "9...7...."
+grid[0] = (int *)malloc(9 * sizeof(int));
+//grid[0] = [9, 0, 0,0 7, 0,0,0,0]
+grid[0][0] = 9
+grid[0][1] = 0
+grid[0][2] = 0
+..
+grid[0][8] = 0
+	 |
+	 line0
+	 	|
+		col8
+--> use while loop
+
+int is_possible(x, y, n)
+
+check the line if there is an number n there in line x -> False = 0
+check the col if there is an number n there in col y -> False = 0
+check the box if there is an number n there (? which box ?) -> False = 0
+return true = 1;
+
+is_possible(4,7, 9) return 0;
+-> the box is from x = 3 to 5 and y = 6 to 8
+
+x = 4
+y = 7
+
+loop through the box:
+x0 = (x / 3) * 3 = (4/3)*3= 1*3 = 3
+y0 = (y /3) * 3 = (7/3) * 3=  2*3 = 6
+		  j        i
+grid[x0 + 0] [y0 + 0] = 0
+grid[x0 + 0] [y0 + 1] = 9
+grid[x0 + 0] [y0 + 2] = 0
+grid[x0 + 1] [y0 + 0] = 8
+grid[x0 + 1] [y0 + 1] = 0
+grid[x0 + 1] [y0 + 2] = 0
+grid[x0 + 2] [y0 + 0] = 0
+grid[x0 + 2] [y0 + 1] = 0
+grid[x0 + 2] [y0 + 2] = 0
+
+loop through the line:
+grid[x][0]= 
+grid[x][1]= 
+grid[x][2]= 
+...
+grid[x][8]= 
+
+loop through the column:
+grid[0][y]= 
+grid[1][y]= 
+grid[2][y]= 
+...
+grid[8][y]= 
+
+
+recursion:
+a function that try to fill the next empty cell until the grid is filled, otherwises go back and change the previous step.
+
+need 3 files:
+- fill the grid with the argument 
+	int **create_sudoku(int argc, char **argv);
+	- create an empty grid
+	- use int argc, char **argv --> fill the grid with number, . is replace by 0
+	- return the grid
+
+- is_possible.c files
+	int is_possible(int **sudoku, int x, int y, int n);
+	- return 1 if it is possible to put number n in sudoku[x][y]
+	- return 0 if is is not possible
+
+- main.c 
+	--> receive an argument
+	- call create_sudoku()
+	- call solve_sudoku()
+
+- solve_sudoku.c
+	- recursion use is_possible()
+
+- deal with error sudoku?
+	if there is an error in the input
+	print "Error" on screen
+
+
+int is_valid(int **sudoku)
+1 if sudoku is valid 
+0 if sudoku is not valid
+
+if sudoku[i][j] is not 0:
+temp = 	sudoku[i][j] --> temp store the value
+sudoku[i][j] = 0 
+is_possible(i, j, temp) true --> sudoku[i][j] = temp
+					false --> error! an invalid sudoku
+
+index  1 2 3 4 5 6 7 8 9
+line0 [1,1,1,1,1,1,1,0,1] if I want to check if n is in line 0: check line0[n-1] == 0 -> not there, 1 -> already have 2 in line0
+line 1
+line 2
+...
+line 8
+
+col 0
+col 1
