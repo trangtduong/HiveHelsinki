@@ -13,3 +13,9 @@ t_btree	*sample_tree(void)
 	root->right->right = btree_create_node("9");
 	return (root);
 }
+
+/*
+				5
+			3		7
+		1   	4 6 	9
+*/

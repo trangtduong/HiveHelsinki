@@ -1,0 +1,36 @@
+o--o
+|  |
+|  |
+o--o
+
+char**array
+array[0]= "o--o"
+array[1]= "|  |"
+
+
+array[5] = NULL
+
+rvuorenl: read input and create a file
+thduong: read the file and create an array, create rush00... 04 programs
+jsaarine: validate the input (array)
+aristov: create the structure for ex00 and Makefile and so on...
+
+git comit -m "mess"
+git pull
+git push
+
+
+
+char	buffer[100000];
+char	*str;
+
+while (read(0, &buffer, 1))
+	{
+		str = ft_strdup(buffer);
+		pushback(str);
+	}
+
+
+our linked list
+
+str[100000] --> str[100000] -->

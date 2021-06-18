@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   result_printer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/13 10:04:28 by jsaarine          #+#    #+#             */
+/*   Updated: 2021/06/13 13:51:23 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_btree.h"
+#include "rush02.h"
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+void	rush0n_printer(int rush_n, int w, int h, int first_match)
 {
-	if (!root || !*root || !item)
-	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
-	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
-	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
+	if (!first_match)
+		ft_putstr(" || ");
+	ft_putstr("[rush-0");
+	ft_putnbr(rush_n);
+	ft_putstr("] [");
+	ft_putnbr(w);
+	ft_putstr("] [");
+	ft_putnbr(h);
+	ft_putstr("]");
 }

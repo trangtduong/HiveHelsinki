@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/12 06:33:10 by thduong           #+#    #+#             */
+/*   Updated: 2021/06/14 14:53:12 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_btree.h"
+// #include <stdio.h>
+#include "eval_expr.h"
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+int	main(int ac, char **av)
 {
-	if (!root || !*root || !item)
+	if (ac > 1)
 	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
+		ft_putnbr(eval_expr(av[1]));
+		ft_putchar('\n');
 	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
-	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
+	return (0);
 }

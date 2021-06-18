@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   btree_level_count.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/11 10:34:12 by thduong           #+#    #+#             */
+/*   Updated: 2021/06/11 10:42:35 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_btree.h"
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+int	max(int a, int b)
 {
-	if (!root || !*root || !item)
-	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
-	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
+	if (a > b)
+		return (a);
 	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
+		return (b);
+}
+
+int	btree_level_count(t_btree *root)
+{
+	if (root)
+	{
+		return (1 + max(btree_level_count(root->left),
+						btree_level_count(root->right)));
+	}
+	return (0);
 }

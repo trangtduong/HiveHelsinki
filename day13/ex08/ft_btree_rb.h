@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   ft_btree_rb.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/11 19:08:04 by thduong           #+#    #+#             */
+/*   Updated: 2021/06/11 19:11:36 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_btree.h"
+#ifndef FT_BTREE_RB_H
+# define FT_BTREE_RB_H
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+enum	e_rb_color
 {
-	if (!root || !*root || !item)
-	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
-	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
-	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
-}
+	RB_BLACK,
+	RB_RED
+};
+
+typedef	struct	s_rb_node
+
+{
+	struct s_rb_node	*parent;
+	struct s_rb_node	*left;
+	struct s_rb_node	*right;
+	void				*data;
+	enum e_rb_color		color;
+}				t_rb_node;
+
+#endif

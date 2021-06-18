@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/13 06:45:42 by thduong           #+#    #+#             */
+/*   Updated: 2021/06/13 16:45:52 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_btree.h"
+#include "rush02.h"
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+int	main(void)
 {
-	if (!root || !*root || !item)
+	t_list	*input;
+	char	**array;
+
+	input = read_input_to_linkedlist();
+	if (input == 0)
 	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
+		write(2, "Nothing\n", 8);
+		return (0);
 	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
-	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
+	array = read_lines(input);
+	shape_detector(array);
+	free_linkedlist(&input);
+	free_array(array);
+	return (0);
 }

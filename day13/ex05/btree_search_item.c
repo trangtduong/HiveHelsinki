@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_insert_data.c                                :+:      :+:    :+:   */
+/*   btree_search_item.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thduong <thduong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 07:36:36 by thduong           #+#    #+#             */
-/*   Updated: 2021/06/11 19:24:51 by thduong          ###   ########.fr       */
+/*   Created: 2021/06/11 10:19:46 by thduong           #+#    #+#             */
+/*   Updated: 2021/06/11 10:32:03 by thduong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_btree.h"
 
-void	btree_insert_data(t_btree **root, void *item,
-							int (*cmpf)(void *, void *))
+void	*btree_search_item(t_btree *root, void *data_ref,
+						int (*cmpf)(void *, void *))
 {
-	if (!root || !*root || !item)
+	void *found;
+
+	found = NULL;
+	if (root)
 	{
-		if (root && item)
-			*root = btree_create_node(item);
-		return ;
+		found = btree_search_item(root->left, data_ref, cmpf);
+		if (!found && cmpf(data_ref, root->item) == 0)
+			found = root->item;
+		if (!found)
+			found = btree_search_item(root->right, data_ref, cmpf);
 	}
-	if ((*cmpf)(item, (*root)->item) >= 0)
-		btree_insert_data(&(*root)->right, item, (*cmpf));
-	else
-		btree_insert_data(&(*root)->left, item, (*cmpf));
+	return (found);
 }
