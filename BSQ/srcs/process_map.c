@@ -18,8 +18,8 @@ void	process_map_from_stdin(void)
 	char	*input;
 	char	*return_map;
 
-	size = write_stdin_to_file("srcs/tmp.txt");
-	input = read_file("srcs/tmp.txt", size);
+	size = write_stdin_to_file("tmp.txt");
+	input = read_file("tmp.txt", size);
 	return_map = bsq_solver(input, &size);
 	if (!return_map)
 		write(2, "map error\n", 10);

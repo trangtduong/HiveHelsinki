@@ -12,8 +12,6 @@
 
 #include "ft_stock_par.h"
 
-void	ft_putchar(char c);
-
 void	ft_putstr(char *str)
 {
 	while (*str != '\0')

@@ -60,12 +60,14 @@ int		my_atoi_base(char *str, char *base)
 	int ret;
 
 	sign = 1;
+	while (*str == ' ' || *str <= 13)
+		str++;
 	if (str[0] == '-')
 	{
 		sign = -1;
 		str++;
 	}
-	if (str[0] == '+')
+	else if (str[0] == '+')
 		str++;
 	ret = 0;
 	while (*str != '\0')

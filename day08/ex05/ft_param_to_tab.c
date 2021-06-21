@@ -13,8 +13,6 @@
 #include <stdlib.h>
 #include "ft_stock_par.h"
 
-char				**ft_split_whitespaces(char *str);
-
 int					ft_strlen(char *str)
 {
 	int count;

@@ -21,9 +21,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		if (argc == 1)
-			ft_putstr("File name missing.\n");
+			write(2, "File name missing.\n", 19);
 		else
-			ft_putstr("Too many arguments.\n");
+			write(2, "Too many arguments.\n", 20);
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
